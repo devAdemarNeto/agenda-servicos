@@ -1,5 +1,6 @@
 package com.neto.agendaservicos.domain.entity;
 
+import com.neto.agendaservicos.domain.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,5 +24,5 @@ public class User {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    private  UserRole role;
+    private UserRole role;
 }
