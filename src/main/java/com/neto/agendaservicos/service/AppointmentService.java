@@ -48,4 +48,26 @@ public class AppointmentService {
 
     }
 
+    public void cancel(Long appointmentId) {
+
+        Appointment appointment = appointmentRepository.findById(appointmentId)
+                .orElseThrow(() -> new BusinessException("Agendamento não encontrado"));
+
+        if (appointment.getStatus() == AppointmentStatus.CANCELLED) {
+            throw new BusinessException("Agendamento já está cancelado");
+        }
+
+        LocalDateTime limit = appointment.getStartTime().minusHours(24);
+
+        if (LocalDateTime.now().isAfter(limit)) {
+            throw new BusinessException(
+                    "Cancelamento permitido apenas com 24h de antecedência"
+            );
+        }
+
+        appointment.cancel();        ;
+        appointmentRepository.save(appointment);
+    }
+
+
 }

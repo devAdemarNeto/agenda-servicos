@@ -31,4 +31,9 @@ public class Appointment {
     private AppointmentStatus status;
 
     private LocalDateTime createdAt;
+
+    public void cancel() {
+        this.status = AppointmentStatus.CANCELLED;
+    }
+
 }
