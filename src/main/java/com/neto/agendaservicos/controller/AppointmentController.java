@@ -35,4 +35,10 @@ public class AppointmentController {
                 appointment.getStatus()
         );
     }
+
+    @DeleteMapping("/{id}/cancel")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void cancel(@PathVariable Long id) {
+        appointmentService.cancel(id);
+    }
 }
