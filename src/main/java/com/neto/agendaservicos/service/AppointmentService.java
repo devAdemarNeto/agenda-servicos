@@ -22,6 +22,13 @@ public class AppointmentService {
             throw new BusinessException("Agendamento deve ser para uma data futura");
         }
 
+        if (endTime.isBefore(startTime) || endTime.isEqual(startTime)) {
+            throw new BusinessException(
+                    "O horário de término deve ser após o horário de início"
+            );
+        }
+
+
         boolean exists = appointmentRepository.existsByProviderIdAndStartTime(providerId,startTime);
 
         if(exists){
